@@ -12,7 +12,7 @@ const pool = new Pool({
     host: 'localhost',
     database: 'vitaltrack',
     password: 'LudySmokey20!2',
-    port: 5423,
+    port: 5432,
 });
 
 app.get('/api/test-db', async (req, res) => {
