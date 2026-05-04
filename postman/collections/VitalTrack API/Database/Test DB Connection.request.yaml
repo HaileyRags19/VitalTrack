@@ -1,0 +1,29 @@
+$kind: http-request
+name: Test DB Connection
+method: GET
+url: '{{baseUrl}}/api/test-db'
+order: 1000
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response has message field", function () {
+          const jsonData = pm.response.json();
+          pm.expect(jsonData).to.have.property('message');
+      });
+
+      pm.test("Message equals PostgreSQL Connect!", function () {
+          const jsonData = pm.response.json();
+          pm.expect(jsonData.message).to.eql('PostgreSQL Connect!');
+      });
+
+      pm.test("Response has time field", function () {
+          const jsonData = pm.response.json();
+          pm.expect(jsonData).to.have.property('time');
+      });
+
+      console.log('VitalTrack DB connection test passed!');
+    language: text/javascript

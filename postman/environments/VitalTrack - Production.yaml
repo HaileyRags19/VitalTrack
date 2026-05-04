@@ -1,0 +1,6 @@
+name: VitalTrack - Production  
+values:  
+  - key: baseUrl  
+    value: 'https://api.vitaltrack.com'  
+    enabled: true  
+    type: default 
