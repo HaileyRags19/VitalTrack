@@ -11,17 +11,31 @@ interface AuditLog {
 export const AuditDashboard: React.FC<{ token: string }> = ({ token }) => {
   const [logs, setLogs] = useState<AuditLog[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
 
   const fetchAuditLogs = async () => {
+    if (!token.trim()) {
+      setError('No Auth0 token configured');
+      setLoading(false);
+      return;
+    }
+
     try {
+      setError('');
+      setLoading(true);
       const response = await fetch('http://localhost:5000/api/audit-logs', {
         headers: { Authorization: `Bearer ${token}` }
       });
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`API request failed (${response.status})`);
+      }
+      const data: AuditLog[] = await response.json();
       setLogs(data);
-      setLoading(false);
     } catch (err) {
-      console.error("Error loading audit logs:", err);
+      const message = err instanceof Error ? err.message : 'Unable to load audit logs';
+      console.error('Error loading audit logs:', err);
+      setError(message);
+    } finally {
       setLoading(false);
     }
   };
@@ -35,6 +49,8 @@ export const AuditDashboard: React.FC<{ token: string }> = ({ token }) => {
       <h2>VitalTrack Forensic Audit Log</h2>
       {loading ? (
         <p>Loading audit state...</p>
+      ) : error ? (
+        <p role="alert">{error}. Check that the API is running and a valid Auth0 token is configured.</p>
       ) : (
         <table border={1} cellPadding={10} style={{ borderCollapse: 'collapse', width: '100%' }}>
           <thead>
