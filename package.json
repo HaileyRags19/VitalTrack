@@ -1,26 +1,38 @@
 {
   "name": "vitaltrack",
-  "version": "1.0.0",
   "private": true,
-  "main": "server.js",
+  "version": "0.1.0",
+  "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev:server": "tsx watch server/src/main.ts",
+    "dev:client": "vite --config client/vite.config.ts",
+    "build": "tsc -p server/tsconfig.json --noEmit && tsc -p client/tsconfig.json --noEmit && vite build --config client/vite.config.ts",
+    "test": "vitest run",
+    "db:init": "tsx server/src/db/init.ts",
+    "start:server": "tsx server/src/main.ts"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "express-oauth2-jwt-bearer": "^1.7.1",
-    "pg": "^8.16.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "@auth0/auth0-react": "^2.29.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.3.0",
+    "express-oauth2-jwt-bearer": "^1.11.0",
+    "pg": "^8.23.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@types/react": "^19.1.0",
-    "@types/react-dom": "^19.1.0",
-    "@vitejs/plugin-react": "^4.4.1",
-    "vite": "^6.3.5"
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.20.5",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.5",
+    "vitest": "^3.2.7"
   }
 }
