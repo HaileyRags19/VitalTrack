@@ -4,6 +4,8 @@ import { PatientsPage } from './pages/PatientsPage';
 import { AuditPage } from './pages/AuditPage';
 import { useRoles } from './useRoles';
 
+{/* The main app component. It handles authentication and routing between the patients and audit pages. */}
+
 export default function App() {
   const { isAuthenticated, isLoading, loginWithRedirect, logout, user } = useAuth0();
   const { isAdmin, roleLabel } = useRoles();

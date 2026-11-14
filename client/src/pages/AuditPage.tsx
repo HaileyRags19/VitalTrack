@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useApi, type AuditRow } from '../api';
 
+{/* The audit page component. It displays a table of audit log entries and allows filtering by patient ID. */}
+
 export function AuditPage() {
   const api = useApi();
   const [rows, setRows] = useState<AuditRow[]>([]);
@@ -19,7 +21,7 @@ export function AuditPage() {
 
   useEffect(() => {
     load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    {/* eslint-disable-next-line react-hooks/exhaustive-deps */} 
   }, []);
 
   return (

@@ -1,6 +1,8 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { useApi, type Patient } from '../api';
 
+{/* The patients page component. It displays a table of patients and allows searching, creating, editing and deleting. */}
+
 export function PatientsPage({ canDelete }: { canDelete: boolean }) {
   const api = useApi();
   const [filters, setFilters] = useState({ last_name: '', first_name: '', dob: '' });
@@ -21,7 +23,7 @@ export function PatientsPage({ canDelete }: { canDelete: boolean }) {
 
   useEffect(() => {
     search();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    {/* eslint-disable-next-line react-hooks/exhaustive-deps */} 
   }, []);
 
   const open = async (id: number) => {
@@ -33,6 +35,8 @@ export function PatientsPage({ canDelete }: { canDelete: boolean }) {
       setError((e as Error).message);
     }
   };
+
+  {/* Deletes a patient after confirmation. This action is recorded in the audit trail. */}
 
   const remove = async (id: number) => {
     if (!confirm('Delete this patient? This is recorded in the audit trail.')) return;
@@ -108,6 +112,8 @@ export function PatientsPage({ canDelete }: { canDelete: boolean }) {
     </div>
   );
 }
+
+{/* The patient form component. It is used for creating and editing patients. */}
 
 function PatientForm({
   title,

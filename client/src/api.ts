@@ -1,6 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { useCallback } from 'react';
 
+{/* The API types and fetch wrapper. */}
+
 export interface Patient {
   patient_id: number;
   first_name: string;
@@ -20,7 +22,7 @@ export interface AuditRow {
   new_data: unknown;
 }
 
-// Returns a fetch wrapper that attaches the Auth0 access token.
+{/* Returns a fetch wrapper that attaches the Auth0 access token. */}
 export function useApi() {
   const { getAccessTokenSilently } = useAuth0();
   return useCallback(
